@@ -48,3 +48,12 @@ Route::middleware('auth')->group(function () {
         Route::patch('/tasks/{task}/status', [StaffTaskController::class, 'updateStatus'])->name('tasks.updateStatus');
     });
 });
+
+Route::get('/clear-cache', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+
+    return "Cache Cleared!";
+});
